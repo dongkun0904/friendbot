@@ -5,10 +5,11 @@ from friendbot.trainset import conversations
 
 
 class Friendbot():
+    bot = None
 
     def __init__(self, name="friendbot"):
         # Create a friendbot
-        self.bot = ChatBot(
+        Friendbot.bot = ChatBot(
             name,
             storage_adapter='chatterbot.storage.SQLStorageAdapter',
             database_uri='sqlite:///data/db.sqlite3',  # sqlite:// if you want in memory
@@ -20,16 +21,17 @@ class Friendbot():
                 }
             ]
         )
+        self.name = name
 
     def train(self):
-        trainer = ListTrainer(self.bot)
+        trainer = ListTrainer(Friendbot.bot)
 
         for conversation in conversations:
             c = []
             for response in conversation:
-                c.append(response.format(name=self.bot.name))
+                c.append(response.format(name=self.name))
             trainer.train(c)
 
     def getBotResponse(self, userResponse):
-        botResponse = self.bot.get_response(userResponse)
+        botResponse = Friendbot.bot.get_response(userResponse)
         return botResponse
