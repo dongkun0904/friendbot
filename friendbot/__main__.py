@@ -2,8 +2,9 @@ import sys
 
 from chatterbot import ChatBot
 
-from friendbot.friendbot import startFriendbot
-from friendbot.train import train
+from friendbot.friendbot import Friendbot
+from friendbot.gui import createChattingWindow
+
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
@@ -13,21 +14,19 @@ if __name__ == '__main__':
     name = sys.argv[1]
 
     # Create a friendbot
-    friendbot = ChatBot(
-        name,
-        storage_adapter='chatterbot.storage.SQLStorageAdapter',
-        database_uri='sqlite:///data/db.sqlite3',  # sqlite:// if you want in memory
-        logic_adapters=[
-            {
-                'import_path': 'chatterbot.logic.BestMatch',
-                'default_response': 'I am sorry, I\'m not sure',
-                'maximum_similarity_threshold': 0.90
-            }
-        ]
-    )
+    friendbot = Friendbot(name)
 
     # Train the friendbot
-    train(friendbot)
+    friendbot.train()
 
     # Run the friendbot
-    startFriendbot(friendbot)
+    print("Say hello to the bot!")
+    while True:
+        try:
+            userResponse = input("You: ")
+
+            botResponse = friendbot.getBotResponse(userResponse)
+            print("Bot: {}".format(botResponse))
+
+        except(KeyboardInterrupt, EOFError, SystemExit):
+            break
