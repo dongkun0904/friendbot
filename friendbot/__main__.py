@@ -3,7 +3,6 @@ import sys
 from chatterbot import ChatBot
 
 from friendbot.friendbot import Friendbot
-from friendbot.gui import createChattingWindow
 
 
 if __name__ == '__main__':
@@ -25,7 +24,7 @@ if __name__ == '__main__':
         try:
             userResponse = input("You: ")
 
-            botResponse = friendbot.getBotResponse(userResponse)
+            botResponse = Friendbot.getBotResponse(userResponse)
             print("Bot: {}".format(botResponse))
 
         except(KeyboardInterrupt, EOFError, SystemExit):
