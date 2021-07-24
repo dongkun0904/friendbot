@@ -32,6 +32,6 @@ class Friendbot():
                 c.append(response.format(name=self.name))
             trainer.train(c)
 
-    def getBotResponse(self, userResponse):
+    def getBotResponse(userResponse):
         botResponse = Friendbot.bot.get_response(userResponse)
         return botResponse
