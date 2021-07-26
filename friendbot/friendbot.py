@@ -1,7 +1,7 @@
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
 
-from friendbot.trainset import conversations
+from trainset import conversations
 
 
 class Friendbot():
