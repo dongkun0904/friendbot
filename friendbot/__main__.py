@@ -3,7 +3,6 @@ import sys
 from chatterbot import ChatBot
 
 from friendbot.friendbot import Friendbot
-# from friendbot.gui import createChattingWindow
 
 
 if __name__ == '__main__':
